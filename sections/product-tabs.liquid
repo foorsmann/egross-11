@@ -130,12 +130,12 @@
 								{% if enable_slider == true %}<!-- Start .swiper-wrapper --><div class="swiper-wrapper">{% endif %}
 								{% for product in current_collection.products limit: product_limit %}
 									{% if enable_slider %}
-										<div class="swiper-slide sf-column">
-											{% render 'product-card', product: product, card_style: card_style, image_ratio: image_ratio, show_vendor: show_vendor %}
-										</div>
-									{% else %}
-										{% render 'product-card', product: product, card_style: card_style, image_ratio: image_ratio, show_vendor: show_vendor, column_wrapper: true %}
-									{% endif %}
+                                                                                <div class="swiper-slide sf-column">
+                                                                                        {% render 'product-card', product: product, card_style: card_style, image_ratio: image_ratio, show_vendor: show_vendor, is_slider_card: true %}
+                                                                                </div>
+                                                                        {% else %}
+                                                                                {% render 'product-card', product: product, card_style: card_style, image_ratio: image_ratio, show_vendor: show_vendor, column_wrapper: true %}
+                                                                        {% endif %}
 								{% else %}
 									{% for i in (1..product_limit) %}
 										<div class="swiper-slide sf-column text-{{ settings.pcard_alignment }}">

@@ -55,7 +55,7 @@
                   {% endif %}
                   {% if product != blank %}
                     <div class="lg:px-5">
-                      {% render 'product-card', product: product, card_style: card_style, image_ratio: image_ratio, show_vendor: show_vendor, alignment: pcard_alignment %}
+                      {% render 'product-card', product: product, card_style: card_style, image_ratio: image_ratio, show_vendor: show_vendor, alignment: pcard_alignment, is_slider_card: true %}
                     </div>
                   {% else %}
                     <div class="text-{{ settings.pcard_alignment }}">
