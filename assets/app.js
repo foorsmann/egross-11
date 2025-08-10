@@ -10239,28 +10239,14 @@ initTheme();
 /******/ })()
 ;
 (function(){
-  function runForAllSliders(){
-    const roots = document.querySelectorAll(
-      '.sf__recently-viewed, .sf__product-recommendations, .related-products, .js-slider, [data-slider], .rvp-section, .recommendations'
-    );
-    roots.forEach(root => {
-      if (window.QtyGuard) window.QtyGuard.applyToSliderRoot(root);
-    });
+  if (window.QtyGuard && typeof window.QtyGuard.runAll === 'function') {
+    window.QtyGuard.runAll();
   }
 
-  document.addEventListener('DOMContentLoaded', runForAllSliders);
-  window.addEventListener('slider:init', runForAllSliders);
-  window.addEventListener('slider:updated', runForAllSliders);
-
-  const mo = new MutationObserver((muts)=>{
-    for (const m of muts) {
-      if (!(m.target instanceof Element)) continue;
-      if (m.target.matches('.sf__recently-viewed, .sf__product-recommendations, .related-products, .js-slider, [data-slider], .rvp-section, .recommendations')
-          || m.target.closest('.sf__recently-viewed, .sf__product-recommendations, .related-products, .js-slider, [data-slider], .rvp-section, .recommendations')) {
-        runForAllSliders();
-        break;
-      }
-    }
+  window.addEventListener('collectionQuickAdd:initialized', () => {
+    window.QtyGuard && window.QtyGuard.runAll();
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
+  window.addEventListener('collectionQuickAdd:mutated', () => {
+    window.QtyGuard && window.QtyGuard.runAll();
+  });
 })();
