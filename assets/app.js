@@ -10238,3 +10238,15 @@ initTheme();
 }();
 /******/ })()
 ;
+(function(){
+  if (window.QtyGuard && typeof window.QtyGuard.runAll === 'function') {
+    window.QtyGuard.runAll();
+  }
+
+  window.addEventListener('collectionQuickAdd:initialized', () => {
+    window.QtyGuard && window.QtyGuard.runAll();
+  });
+  window.addEventListener('collectionQuickAdd:mutated', () => {
+    window.QtyGuard && window.QtyGuard.runAll();
+  });
+})();

@@ -123,7 +123,7 @@
               {% for product in current_collection.products limit: product_to_show %}
                 {% if enable_slider %}
                   <div class="swiper-slide sf-column">
-                    {% render 'product-card', product: product, card_style: card_style, image_ratio: image_ratio, show_vendor: show_vendor, hide_title: hide_title %}
+                    {% render 'product-card', product: product, card_style: card_style, image_ratio: image_ratio, show_vendor: show_vendor, hide_title: hide_title, is_slider_card: true %}
                   </div>
                 {% else %}
                   {% render 'product-card', product: product, column_wrapper: true, card_style: card_style, image_ratio: image_ratio, show_vendor: show_vendor, hide_title: hide_title %}

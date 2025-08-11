@@ -52,9 +52,9 @@
 
   assign sold_number = product.metafields.foxkit.sold_number
 
-  if product.available 
+  if product.available
     assign variant_id = product.first_available_variant.id
-  else 
+  else
     assign variant_id = product.selected_or_first_available_variant.id
   endif
   assign selected_variant_id = ''
@@ -62,10 +62,24 @@
     assign variant_id = product.selected_or_first_available_variant.id
     assign selected_variant_id = product.selected_variant.id
   endif
+  assign v = product.selected_or_first_available_variant
+  assign min_qty = product.quantity_rule.min | default: product.metafields.custom.minimum_quantity | default: 1
+  assign available = v.inventory_quantity | default: 0
+  assign is_slider_card = is_slider_card | default: false
 %}
 
 {%- if column_wrapper -%}<div class="sf-column">{%- endif -%}
-  <div class="sf__pcard{% if sold_out %} sf__pcard--soldout{% endif %}{% if on_sale %} sf__pcard--onsale{% endif %} cursor-pointer sf-prod__block sf__pcard-style-{{ card_style }}" data-view="card"{% if sold_number != blank %} data-sold-number="{{ sold_number }}"{% endif %} data-product-id="{{ product.id }}">  
+  <div class="sf__pcard{% if sold_out %} sf__pcard--soldout{% endif %}{% if on_sale %} sf__pcard--onsale{% endif %} cursor-pointer sf-prod__block sf__pcard-style-{{ card_style }}" data-view="card"{% if sold_number != blank %} data-sold-number="{{ sold_number }}"{% endif %} data-product-id="{{ product.id }}"{% if is_slider_card %} data-is-slider-card="true" data-min-qty="{{ min_qty }}" data-available="{{ available }}"{% endif %}>
+    {% if is_slider_card %}
+      <script type="application/json" data-slider-product>
+        {
+          "id": {{ product.id | json }},
+          "handle": {{ product.handle | json }},
+          "min_qty": {{ min_qty | json }},
+          "available": {{ v.inventory_quantity | default: 0 | json }}
+        }
+      </script>
+    {% endif %}
       <div class="sf__pcard-image {% unless settings.show_second_img %} spc__img-only{% endunless %}">
         <div class="collection-pcard-error" aria-live="polite"><span class="collection-pcard-error__msg"></span></div>
         <div class="overflow-hidden cursor-pointer relative sf__image-box">

@@ -501,6 +501,7 @@ async function handleDelegatedAddToCart(e){
       var observer = new MutationObserver(function(){
         updateQtyGroupLayout();
         setupCollectionDoubleQtyButtons();
+        window.dispatchEvent(new CustomEvent('collectionQuickAdd:mutated'));
       });
       observer.observe(container, { childList:true, subtree:true });
     }
@@ -520,6 +521,7 @@ async function handleDelegatedAddToCart(e){
     attachQtyButtonListeners();
     attachNoHighlightListeners();
     watchQtyGroupLayout();
+    window.dispatchEvent(new CustomEvent('collectionQuickAdd:initialized'));
   }
   document.addEventListener('DOMContentLoaded', initAll);
   window.addEventListener('shopify:section:load', initAll);
