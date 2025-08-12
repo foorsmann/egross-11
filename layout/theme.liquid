@@ -95,7 +95,9 @@ template-{{ template.name | handle }} {{ template.name }}-{{ template.suffix }} 
   {% render 'script-tags' %}
 
   <script src="{{ 'app.js' | asset_url }}" defer="defer"></script>
-  {{ 'slider-qty-enforcer.js' | asset_url | script_tag }}
+
+  {{ 'slider-qty-fix.js' | asset_url | script_tag }}
+
   <script src="{{ 'foxkit-app.min.js' | asset_url }}" defer="defer"></script>
 
   <script src="{{ 'quick-view.min.js' | asset_url }}" defer="defer"></script>
