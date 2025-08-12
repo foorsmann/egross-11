@@ -77,3 +77,15 @@ input.collection-qty-element:focus {
   height: 46px;
 }
 
+/* Low-stock styling used in sliders and wishlist */
+input.collection-qty-element.is-low-stock {
+  color: #e3342f !important;
+  font-weight: 600;
+}
+
+/* Vizual doar, fara sa blochezi evenimentele la nivel de CSS */
+.collection-double-qty-btn.is-disabled,
+[data-collection-double-qty][disabled] {
+  opacity: .5;            /* optional */
+  cursor: not-allowed;    /* optional */
+}
