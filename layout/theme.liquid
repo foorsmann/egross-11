@@ -94,11 +94,10 @@ template-{{ template.name | handle }} {{ template.name }}-{{ template.suffix }} 
   {% render 'foxkit-messenger' %}
   {% render 'script-tags' %}
 
-  <script src="{{ 'app.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'app.js' | asset_url }}" defer="defer"></script>
+{{ 'slider-qty-fix.js' | asset_url | script_tag }}
+<script src="{{ 'foxkit-app.min.js' | asset_url }}" defer="defer"></script>
 
-  {{ 'slider-qty-fix.js' | asset_url | script_tag }}
-
-  <script src="{{ 'foxkit-app.min.js' | asset_url }}" defer="defer"></script>
 
   <script src="{{ 'quick-view.min.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-card-swatch.min.js' | asset_url }}" defer="defer"></script>

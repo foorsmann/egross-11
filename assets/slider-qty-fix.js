@@ -15,7 +15,7 @@
 
   function findDoubleQtyButton(scope) {
     if (!scope) return null;
-    // Detectie robusta pentru toate variantele intalnite in tema
+    // Detectie robustă pentru toate variantele întâlnite în temă
     return (
       scope.querySelector('[data-collection-double-qty]') ||
       scope.querySelector('.collection-double-qty-btn') ||
@@ -26,20 +26,14 @@
 
   function setDoubleBtnDisabled(btn, disabled) {
     if (!btn) return;
-    if (disabled) {
-      btn.setAttribute('disabled', 'true');
-      btn.setAttribute('aria-disabled', 'true');
-      btn.classList.add('is-disabled');
-      // fortam si vizual, in caz ca CSS-ul nu este prezent
-      btn.style.pointerEvents = 'none';
-      btn.style.opacity = '0.5';
-    } else {
-      btn.removeAttribute('disabled');
-      btn.setAttribute('aria-disabled', 'false');
-      btn.classList.remove('is-disabled');
-      btn.style.pointerEvents = '';
-      btn.style.opacity = '';
-    }
+    // 1) Starea semantică
+    btn.toggleAttribute('disabled', disabled);
+    btn.setAttribute('aria-disabled', String(disabled));
+    btn.classList.toggle('is-disabled', disabled);
+
+    // 2) Curățare stiluri inline moștenite din patch-urile anterioare
+    if (btn.style.pointerEvents) btn.style.pointerEvents = '';
+    if (btn.style.opacity) btn.style.opacity = '';
   }
 
   function initInput(input) {
@@ -49,10 +43,10 @@
                  parseInt(input.step || '1', 10) || 1;
     const max  = parseInt(input.max || '0', 10) || 0;
 
-    // Ce afisam: stocul daca este sub pas, altfel pasul
+    // Ce afișăm: stocul dacă este sub pas, altfel pasul
     const display = (max > 0 && max < step) ? max : step;
 
-    // Setam atat prop cat si atributul value (unele scripturi citesc atributul)
+    // Setăm atât prop cât și atributul value
     input.value = String(display);
     input.setAttribute('value', String(display));
 
@@ -66,16 +60,16 @@
       input.style.color = '';
     }
 
-    // Actualizam starea butoanelor +/-
+    // Actualizăm starea butoanelor +/-
     const wrap = input.closest('collection-quantity-input') || input.parentElement;
     if (wrap) {
       const plus  = wrap.querySelector('[data-collection-quantity-selector="increase"]');
       const minus = wrap.querySelector('[data-collection-quantity-selector="decrease"]');
-      if (plus)  plus.disabled  = isFinite(max) && display >= max; // nu poti depasi stocul
-      if (minus) minus.disabled = display <= step;                  // nu cobori sub pas
+      if (plus)  plus.disabled  = isFinite(max) && display >= max;
+      if (minus) minus.disabled = display <= step;
     }
 
-    // „Adauga inca …” trebuie dezactivat cand stoc < pas
+    // „Adaugă încă …” trebuie dezactivat când stoc < pas
     const card = input.closest('.sf__pcard, .p-card, .product-card, .sf__col-item, [data-product-id], .swiper-slide, [data-section-type]');
     const dblBtn = findDoubleQtyButton(card);
     setDoubleBtnDisabled(dblBtn, isLow);
@@ -99,7 +93,7 @@
     init();
   }
 
-  // Supravegheaza injectarile dinamice (recent/recommendations/etc.)
+  // Supraveghează injecțiile dinamice (recent/recommendations/etc.)
   const mo = new MutationObserver(muts => {
     for (const m of muts) {
       m.addedNodes.forEach(node => {
@@ -114,3 +108,4 @@
   });
   mo.observe(document.documentElement, { childList: true, subtree: true });
 })();
+
