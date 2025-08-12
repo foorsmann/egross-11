@@ -77,3 +77,10 @@ input.collection-qty-element:focus {
   height: 46px;
 }
 
+
+/* Asigura dezactivarea vizuala a butonului in toate sliderele */
+[data-section-type] .collection-double-qty-btn.is-disabled,
+[data-section-type] [data-collection-double-qty][disabled] {
+  pointer-events: none;
+  opacity: .5;
+}
