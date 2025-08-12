@@ -77,3 +77,10 @@ input.collection-qty-element:focus {
   height: 46px;
 }
 
+
+/* Vizual doar, fara sa blochezi evenimentele la nivel de CSS */
+[data-section-type] .collection-double-qty-btn.is-disabled,
+[data-section-type] [data-collection-double-qty][disabled] {
+  opacity: .5;            /* optional, comenteaza daca nu-l vrei */
+  cursor: not-allowed;    /* optional */
+}
