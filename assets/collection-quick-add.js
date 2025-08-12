@@ -21,7 +21,73 @@
     var sel = window.getSelection ? window.getSelection() : null;
     if(sel && sel.removeAllRanges){ sel.removeAllRanges(); }
   }
+
+  // ---- Slider Qty Guard (context-aware) ----
+  const QG_SLIDER_TYPES = new Set([
+    'recently-viewed',
+    'product-recommendations',
+    'foxkit-related-products',
+    'featured-collection',
+    'product-tabs'
+  ]);
+
+  function qgIsSliderInput(input) {
+    const sec = input && input.closest('[data-section-type]');
+    if (!sec) return false;
+    return QG_SLIDER_TYPES.has(sec.getAttribute('data-section-type'));
+  }
+
+  function qgEnforceSliderInput(input) {
+    if (!input || !qgIsSliderInput(input)) return false;
+
+    const step = parseInt(input.getAttribute('data-collection-min-qty') || input.getAttribute('step') || '1', 10) || 1;
+    const max  = parseInt(input.getAttribute('max') || '0', 10) || 0;
+
+    // display: daca stoc < min_qty => stoc; altfel min_qty
+    const display = (max > 0 && max < step) ? max : step;
+
+    // setam atat prop cat si atribute
+    input.min = String(display);
+    input.setAttribute('min', String(display));
+    input.step = String(step);
+    input.setAttribute('step', String(step));
+    input.value = String(display);
+    input.setAttribute('value', String(display));
+
+    // low-stock vizual
+    const isLow = (max > 0 && max < step);
+    input.classList.toggle('is-low-stock', isLow);
+    input.classList.toggle('text-red-600', isLow);
+    if (isLow) {
+      input.style.setProperty('color', '#e3342f', 'important');
+    } else {
+      input.style.removeProperty('color');
+    }
+
+    // buton „Adauga inca …”
+    const card = input.closest('.sf__pcard, .p-card, .product-card, .sf__col-item, [data-product-id], .swiper-slide') || document;
+    const dbl  = card.querySelector('[data-collection-double-qty], .collection-double-qty-btn, .double-qty-btn');
+    if (dbl) {
+      const disabled = !(max >= step);
+      if (disabled) {
+        dbl.setAttribute('disabled', 'true');
+        dbl.setAttribute('aria-disabled', 'true');
+        dbl.classList.add('is-disabled');
+      } else {
+        dbl.removeAttribute('disabled');
+        dbl.removeAttribute('aria-disabled');
+        dbl.classList.remove('is-disabled');
+      }
+    }
+
+    // marcare pt. idempotenta
+    input.setAttribute('data-qg-fixed', '1');
+    return true;
+  }
   function validateAndHighlight(input){
+      if(qgIsSliderInput(input)){
+        return;
+    }
       if(input.value === ''){
         input.classList.remove('text-red-600');
         input.style.color = '';
@@ -57,6 +123,7 @@
     if(minus) minus.disabled = val <= minQty;
   }
   function syncOtherQtyInputs(changed){
+    if(qgIsSliderInput(changed)) return;
     var pid = changed.dataset.collectionProductId;
     if(!pid) return;
     var value = changed.value;
@@ -73,6 +140,8 @@
   }
   function applyMinQty(){
     document.querySelectorAll('input[data-collection-min-qty]').forEach(function(input){
+      // SLIDER: folosim regula proprie si iesim
+      if (qgEnforceSliderInput(input)) return;
       var min = parseInt(input.getAttribute('data-collection-min-qty'),10);
       if(min && min > 0){
         input.min = 1;
@@ -170,7 +239,7 @@
       }
       if(val > max) val = max;
     }
-    var newVal = clampAndSnap(val, step, 1, max);
+    var newVal = clampAndSnap(val, step, parseInt(input.min,10) || 1, max);
     input.value = newVal;
     if(newVal >= max){
       input.classList.add('text-red-600');
@@ -498,9 +567,21 @@ async function handleDelegatedAddToCart(e){
     window.addEventListener('resize', updateQtyGroupLayout);
     var container = document.querySelector('.sf-collection-list, .collection-listing');
     if(container && window.MutationObserver){
-      var observer = new MutationObserver(function(){
+      var observer = new MutationObserver(function(mutations){
         updateQtyGroupLayout();
         setupCollectionDoubleQtyButtons();
+        mutations.forEach(function(m){
+          m.addedNodes.forEach(function(node){
+            if(!(node instanceof HTMLElement)) return;
+            var root = node;
+            if(root.matches && root.matches('input.collection-qty-element[data-collection-quantity-input]')){
+              if(qgIsSliderInput(root)) qgEnforceSliderInput(root);
+            }
+            root.querySelectorAll && root.querySelectorAll('input.collection-qty-element[data-collection-quantity-input]').forEach(function(inp){
+              if(qgIsSliderInput(inp)) qgEnforceSliderInput(inp);
+            });
+          });
+        });
       });
       observer.observe(container, { childList:true, subtree:true });
     }
