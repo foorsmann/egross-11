@@ -6271,6 +6271,12 @@ register('product-tabs', {
 
       if (products) {
         Array.from(products.childNodes).forEach(product => productsContainer.appendChild(product)); // ConceptSGMTheme.Products.initProductForms({context: this.context})
+        const root = (productsContainer.closest('[data-section-type]')) || wrapper || document;
+        document.dispatchEvent(new CustomEvent('sf:slider-products-loaded', {
+          detail: {
+            root
+          }
+        }));
       }
 
       if (currentPage >= parseInt(totalPages)) loadBtn && loadBtn.remove();
@@ -6352,6 +6358,13 @@ class ProductList {
       this.container.classList.remove('hidden');
       window.addEventListener('resize', debounce_debounce(this.initByScreenSize, 300));
       refreshProductReview();
+      const wrapper = this.container.querySelector('[data-product-list]') || this.container.querySelector('.swiper-wrapper');
+      const root = (wrapper && wrapper.closest('[data-section-type]')) || this.container || document;
+      document.dispatchEvent(new CustomEvent('sf:slider-products-loaded', {
+        detail: {
+          root
+        }
+      }));
     });
 
     _defineProperty(this, "initByScreenSize", () => {
