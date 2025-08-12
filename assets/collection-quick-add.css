@@ -77,9 +77,16 @@ input.collection-qty-element:focus {
   height: 46px;
 }
 
+/* fallback discret pentru low-stock în slidere */
+[data-section-type] input.collection-qty-element.is-low-stock {
+  color: #e3342f !important;
+  font-weight: 600;
+}
 
-/* Vizual doar, fara sa blochezi evenimentele la nivel de CSS */
+/* Asigura dezactivarea vizuala a butonului in toate sliderele */
 [data-section-type] .collection-double-qty-btn.is-disabled,
 [data-section-type] [data-collection-double-qty][disabled] {
-  cursor: not-allowed;    /* optional */
+  pointer-events: none;
+  opacity: .5;
 }
+
