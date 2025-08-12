@@ -12,20 +12,6 @@
   function raf2(fn){ requestAnimationFrame(() => requestAnimationFrame(fn)); }
   function getInt(x, d){ const n = parseInt(x, 10); return Number.isNaN(n) ? d : n; }
 
-  function clampAndSnap(val, step, min, max){
-    let v = Number.isFinite(val) ? val : min;
-    if (v < min) v = min;
-    if (v > max) v = max;
-    if (step > 1) {
-      const r = (v - min) % step;
-      if (r !== 0) {
-        v = v - r;
-        if (v < min) v = min;
-      }
-    }
-    return v;
-  }
-
   function isInSlider(el){
     const sec = el.closest('[data-section-type]');
     if (!sec) return false;
@@ -35,36 +21,30 @@
   function enforceOnInput(input){
     if (!isInSlider(input)) return;
 
-    const minAttr  = getInt(input.getAttribute('min'), 1);
-    const stepAttr = getInt(input.getAttribute('data-collection-min-qty') || input.getAttribute('step'), 1);
-    const maxAttr  = getInt(input.getAttribute('max'), Infinity);
+    const stepAttr = parseInt(input.getAttribute('data-collection-min-qty') || input.getAttribute('step') || '1',10) || 1;
+    const maxAttr  = parseInt(input.getAttribute('max') || '0',10) || 0;
+    const display  = (maxAttr > 0 && maxAttr < stepAttr) ? maxAttr : stepAttr;
 
-    // Afișare: dacă stoc < min_qty -> arătăm stocul (max), altfel min_qty (step)
-    const displayTarget = (maxAttr > 0 && maxAttr < stepAttr) ? maxAttr : stepAttr;
-    const display = clampAndSnap(displayTarget, stepAttr, minAttr || stepAttr, maxAttr);
-
-    // setăm atât prop, cât și atributul (unele scripturi citesc atributul)
+    input.min = String(display);
+    input.setAttribute('min', String(display));
+    input.step = String(stepAttr);
+    input.setAttribute('step', String(stepAttr));
     input.value = String(display);
     input.setAttribute('value', String(display));
 
-    // stare low-stock (roșu) când stoc < min_qty
     const low = (maxAttr > 0 && maxAttr < stepAttr);
     input.classList.toggle('is-low-stock', low);
     input.classList.toggle('text-red-600', low);
-    if (low) {
-      input.style.setProperty('color', '#e3342f', 'important');
-    } else {
-      input.style.removeProperty('color');
-    }
+    if (low) input.style.setProperty('color', '#e3342f', 'important');
+    else input.style.removeProperty('color');
 
-    // butonul „Adauga inca …” se dezactivează dacă stocul < min_qty
     const card = input.closest('.sf__pcard, .p-card, .product-card, .sf__col-item, [data-product-id], .swiper-slide') || document;
     const dbl  = card.querySelector('[data-collection-double-qty], .collection-double-qty-btn, .double-qty-btn');
     if (dbl){
       const disabled = !(maxAttr >= stepAttr);
-      if (disabled) {
-        dbl.setAttribute('disabled', 'true');
-        dbl.setAttribute('aria-disabled', 'true');
+      if (disabled){
+        dbl.setAttribute('disabled','true');
+        dbl.setAttribute('aria-disabled','true');
         dbl.classList.add('is-disabled');
       } else {
         dbl.removeAttribute('disabled');
