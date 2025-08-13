@@ -39,12 +39,21 @@
 // Theming-safe UI update for a collection-qty input inside sliders
 function qgSyncSliderQtyUI(qtyEl, sendQty) {
   if (!qtyEl) return;
+
+  var step = parseInt(qtyEl.getAttribute('data-collection-min-qty') || qtyEl.step || '1', 10) || 1;
+  var max  = parseInt(qtyEl.getAttribute('max') || qtyEl.max || '0', 10) || 0;
+
+  if (isFinite(max) && max > 0 && sendQty > max) {
+    sendQty = max;
+  }
+  if (sendQty < 1) {
+    sendQty = 1;
+  }
+
   // set both prop and attribute (unele scripturi citesc atributul)
   qtyEl.value = String(sendQty);
   qtyEl.setAttribute('value', String(sendQty));
 
-  var step      = parseInt(qtyEl.getAttribute('data-collection-min-qty') || qtyEl.step || '1', 10) || 1;
-  var max       = parseInt(qtyEl.getAttribute('max') || qtyEl.max || '0', 10) || 0;
   var atMax     = isFinite(max) && sendQty >= max;
   var highlight = max > 0 && sendQty >= max;
 
@@ -90,7 +99,6 @@ function qgSyncSliderQtyUI(qtyEl, sendQty) {
     window.updateCollectionDoubleQtyState(qtyEl);
   }
 }
-
 
 
 
