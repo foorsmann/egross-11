@@ -33,9 +33,10 @@
     input.setAttribute('value', String(display));
 
     const low = (maxAttr > 0 && maxAttr < stepAttr);
+    const highlight = (maxAttr > 0 && display >= maxAttr);
     input.classList.toggle('is-low-stock', low);
-    input.classList.toggle('text-red-600', low);
-    if (low) input.style.setProperty('color', '#e3342f', 'important');
+    input.classList.toggle('text-red-600', highlight);
+    if (highlight) input.style.setProperty('color', '#e3342f', 'important');
     else input.style.removeProperty('color');
 
     const card = input.closest('.sf__pcard, .p-card, .product-card, .sf__col-item, [data-product-id], .swiper-slide') || document;
