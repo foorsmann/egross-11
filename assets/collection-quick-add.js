@@ -488,6 +488,12 @@ async function handleDelegatedAddToCart(e){
     if(!variantId) return;
     var qtyEl = info.qtyEl || form.querySelector('input[name="quantity"]');
     var requestedQty = info.val;
+    if (qtyEl && parseInt(qtyEl.value, 10) === 0) {
+      qtyEl.value = requestedQty;
+      qtyEl.setAttribute('value', String(requestedQty));
+      qtyEl.dispatchEvent(new Event('input', { bubbles: true }));
+      qtyEl.dispatchEvent(new Event('change', { bubbles: true }));
+    }
     var maxQty = qtyEl && qtyEl.max ? parseInt(qtyEl.max,10) : Infinity;
 
     var cartQty = 0;
