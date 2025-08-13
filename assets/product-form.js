@@ -85,10 +85,20 @@ if (!customElements.get("product-form")) {
         });
       }
 
+      const qtyInput = this.form.querySelector('[name="quantity"]');
+      if (qtyInput && parseInt(qtyInput.value, 10) === 0) {
+        qtyInput.value = 1;
+        qtyInput.dispatchEvent(new Event('input', {
+          bubbles: true
+        }));
+        qtyInput.dispatchEvent(new Event('change', {
+          bubbles: true
+        }));
+      }
+
       const formData = new FormData(this.form);
       const variantId = parseInt(formData.get('id'), 10);
       const requestedQty = parseInt(formData.get('quantity')) || 1;
-      const qtyInput = this.form.querySelector('[name="quantity"]');
       const maxQty = parseInt(qtyInput?.max) || Infinity;
       let resetQty = false;
 
