@@ -397,10 +397,8 @@ function qgSyncSliderQtyUI(qtyEl, sendQty) {
     var qtyEl = findQtyEl(baseCard);
     var val = parseInt(qtyEl && (qtyEl.value || qtyEl.getAttribute('value')) || '1',10);
     if(!isFinite(val) || val < 1) val = 1;
-    var step = parseInt(qtyEl && (qtyEl.getAttribute('data-collection-min-qty') || qtyEl.step || '1'),10) || 1;
-    var min = parseInt(qtyEl && (qtyEl.getAttribute('data-collection-min-qty') || qtyEl.min || step || '1'),10) || 1;
     var max = parseInt(qtyEl && (qtyEl.max || '999999'),10) || 999999;
-    val = clampAndSnap(val, step, min, max, true);
+    if(val > max) val = max;
     return { val: val, baseCard: baseCard, qtyEl: qtyEl };
   }
   function findQtyInput(btn){
