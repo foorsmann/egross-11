@@ -85,6 +85,14 @@
     }
   }
 
+  function qgShowErrorAndFocus(errorObj, msg, inputEl) {
+    if (errorObj && typeof errorObj.show === 'function') errorObj.show(msg);
+    if (inputEl && typeof inputEl.focus === 'function') {
+      inputEl.focus();
+      try { inputEl.select && inputEl.select(); } catch(e){}
+    }
+  }
+
   // ---- Slider Qty Guard (context-aware) ----
   function qgIsSliderInput(input) {
     return qgIsSliderNode(input);
@@ -477,6 +485,29 @@ async function handleDelegatedAddToCart(e){
       return;
     }
 
+    var inSlider = qgIsSliderNode(btn || form || qtyEl);
+    if (inSlider && qtyEl) {
+      var step = parseInt(qtyEl.getAttribute('data-collection-min-qty') || qtyEl.step || '1', 10) || 1;
+      var requested = parseInt(qtyEl.value, 10);
+      if (!isFinite(requested) || requested <= 0) requested = step;
+
+      if (available < step) {
+        qgSyncSliderQtyUI(qtyEl, available);
+        qtyEl.dispatchEvent(new Event('input', { bubbles: true }));
+        qtyEl.dispatchEvent(new Event('change', { bubbles: true }));
+        requestedQty = available;
+      } else if (requested < step) {
+        qgSyncSliderQtyUI(qtyEl, step);
+        qtyEl.dispatchEvent(new Event('input', { bubbles: true }));
+        qtyEl.dispatchEvent(new Event('change', { bubbles: true }));
+        qgShowErrorAndFocus(error, window.ConceptSGMStrings?.minQty || ('Cantitatea minima este ' + step), qtyEl);
+        btn.removeAttribute('aria-busy');
+        btn.disabled = false;
+        addToCartLocks.delete(btn);
+        return;
+      }
+    }
+
     const exceed = requestedQty > available;      // cerere > disponibil
     const resetQty = requestedQty >= available;   // cerere >= disponibil → vrem reset ca pe product page
 
@@ -485,7 +516,6 @@ async function handleDelegatedAddToCart(e){
       sendQty = available; // plafonăm doar când depășește
     }
 
-    var inSlider = qgIsSliderNode(btn || form || qtyEl);
     if (inSlider && qtyEl) {
       qgSyncSliderQtyUI(qtyEl, sendQty);
       qtyEl.dispatchEvent(new Event('input', { bubbles: true }));
@@ -725,11 +755,41 @@ async function handleDelegatedAddToCart(e){
       const available = Math.max(maxQty - cartQty,0);
       let resetQty = false;
       let sendQty = requestedQty;
-        if(available <= 0){
-          this.error.show(window.ConceptSGMStrings?.cartLimit || 'Cantitatea maxima pentru acest produs este deja in cos.');
+      if(available <= 0){
+        this.error.show(window.ConceptSGMStrings?.cartLimit || 'Cantitatea maxima pentru acest produs este deja in cos.');
+        this.toggleSpinner(false);
+        return;
+      }
+
+      var inSlider = qgIsSliderNode(this.form || qtyInput);
+      if (inSlider && qtyInput) {
+        var step = parseInt(qtyInput.getAttribute('data-collection-min-qty') || qtyInput.step || '1', 10) || 1;
+        var requested = parseInt(qtyInput.value, 10);
+        if (!isFinite(requested) || requested <= 0) requested = step;
+
+        if (available < step) {
+          qgSyncSliderQtyUI(qtyInput, available);
+          qtyInput.dispatchEvent(new Event('input', { bubbles: true }));
+          qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
+          sendQty = available;
+          resetQty = true;
+        } else if (requested < step) {
+          qgSyncSliderQtyUI(qtyInput, step);
+          qtyInput.dispatchEvent(new Event('input', { bubbles: true }));
+          qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
+          qgShowErrorAndFocus(this.error, window.ConceptSGMStrings?.minQty || ('Cantitatea minima este ' + step), qtyInput);
           this.toggleSpinner(false);
           return;
+        } else if (requested > available) {
+          sendQty = available;
+          resetQty = true;
+          this.error.show(window.ConceptSGMStrings?.cartLimit || 'Cantitatea maxima pentru acest produs este deja in cos.');
+        } else {
+          sendQty = requested;
+          resetQty = sendQty >= available;
         }
+        formData.set('quantity', String(sendQty));
+      } else {
         if(requestedQty >= available){
           if(requestedQty > available){
             sendQty = available;
@@ -739,8 +799,8 @@ async function handleDelegatedAddToCart(e){
           }
           resetQty = true;
         }
-      formData.set('quantity', String(sendQty));
-      var inSlider = qgIsSliderNode(this.form || qtyInput);
+        formData.set('quantity', String(sendQty));
+      }
       if (inSlider && qtyInput) {
         qgSyncSliderQtyUI(qtyInput, sendQty);
         qtyInput.dispatchEvent(new Event('input', { bubbles: true }));
