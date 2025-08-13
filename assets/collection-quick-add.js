@@ -39,14 +39,23 @@
 // Theming-safe UI update for a collection-qty input inside sliders
 function qgSyncSliderQtyUI(qtyEl, sendQty) {
   if (!qtyEl) return;
+
+  var step = parseInt(qtyEl.getAttribute('data-collection-min-qty') || qtyEl.step || '1', 10) || 1;
+  var max  = parseInt(qtyEl.getAttribute('max') || qtyEl.max || '0', 10) || 0;
+
+  if (isFinite(max) && max > 0 && sendQty > max) {
+    sendQty = max;
+  }
+  if (sendQty < 1) {
+    sendQty = 1;
+  }
+
   // set both prop and attribute (unele scripturi citesc atributul)
   qtyEl.value = String(sendQty);
   qtyEl.setAttribute('value', String(sendQty));
 
-  var step = parseInt(qtyEl.getAttribute('data-collection-min-qty') || qtyEl.step || '1', 10) || 1;
-  var max  = parseInt(qtyEl.getAttribute('max') || qtyEl.max || '0', 10) || 0;
-  var lowStock  = (max > 0 && max < step);
-  var highlight = lowStock && sendQty >= max;
+  var atMax = isFinite(max) && sendQty >= max;
+  var highlight = max > 0 && sendQty >= max;
 
   // highlight cand se atinge stocul disponibil
   qtyEl.classList.toggle('text-red-600', highlight);
@@ -61,7 +70,7 @@ function qgSyncSliderQtyUI(qtyEl, sendQty) {
   if (wrap) {
     var plus  = wrap.querySelector('[data-collection-quantity-selector="increase"]');
     var minus = wrap.querySelector('[data-collection-quantity-selector="decrease"]');
-    if (plus)  plus.disabled  = isFinite(max) && sendQty >= max;
+    if (plus)  plus.disabled  = atMax;
     if (minus) minus.disabled = sendQty <= step;
   }
 
@@ -69,7 +78,8 @@ function qgSyncSliderQtyUI(qtyEl, sendQty) {
   var card = qtyEl.closest('.sf__pcard, .p-card, .product-card, .sf__col-item, [data-product-id], .swiper-slide, [data-section-type]');
   var dbl  = card && (card.querySelector('[data-collection-double-qty]') || card.querySelector('.collection-double-qty-btn') || card.querySelector('.double-qty-btn'));
   if (dbl) {
-    var disabled = lowStock; // cand stoc < min_qty, dezactivat
+    var disabled = atMax;
+    dbl.disabled = disabled;
     dbl.toggleAttribute('disabled', disabled);
     dbl.setAttribute('aria-disabled', String(disabled));
     dbl.classList.toggle('is-disabled', disabled);
