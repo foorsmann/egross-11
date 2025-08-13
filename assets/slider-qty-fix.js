@@ -50,9 +50,10 @@
     input.value = String(display);
     input.setAttribute('value', String(display));
 
-    // Low-stock styling
+    // Highlight cand valoarea afisata atinge stocul disponibil
     const isLow = (max > 0 && max < step);
-    if (isLow) {
+    const highlight = (max > 0 && display >= max);
+    if (highlight) {
       input.classList.add('text-red-600');
       input.style.color = '#e3342f';
     } else {

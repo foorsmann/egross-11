@@ -50,9 +50,10 @@
     input.setAttribute('value', String(display));
 
     const isLow = (max > 0 && max < step);
+    const highlight = (max > 0 && display >= max);
     input.classList.toggle('is-low-stock', isLow);
-    input.classList.toggle('text-red-600', isLow);
-    if (isLow) {
+    input.classList.toggle('text-red-600', highlight);
+    if (highlight) {
       input.style.setProperty('color', '#e3342f', 'important');
     } else {
       input.style.removeProperty('color');
