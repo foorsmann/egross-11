@@ -46,7 +46,7 @@ function qgSyncSliderQtyUI(qtyEl, sendQty) {
   var step = parseInt(qtyEl.getAttribute('data-collection-min-qty') || qtyEl.step || '1', 10) || 1;
   var max  = parseInt(qtyEl.getAttribute('max') || qtyEl.max || '0', 10) || 0;
   var lowStock  = (max > 0 && max < step);
-  var highlight = lowStock && sendQty >= max;
+  var highlight = max > 0 && sendQty >= max;
 
   // highlight cand se atinge stocul disponibil
   qtyEl.classList.toggle('text-red-600', highlight);
