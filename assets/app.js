@@ -10149,6 +10149,10 @@ class Wishlist {
         }
 
         container.classList.add('opacity-100');
+
+        if (!noItemAvailable) {
+          window.dispatchEvent(new Event('shopify:product:updated'));
+        }
       }
     });
 
