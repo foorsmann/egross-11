@@ -43,12 +43,13 @@ function qgSyncSliderQtyUI(qtyEl, sendQty) {
   qtyEl.value = String(sendQty);
   qtyEl.setAttribute('value', String(sendQty));
 
-  var step = parseInt(qtyEl.getAttribute('data-collection-min-qty') || qtyEl.step || '1', 10) || 1;
-  var max  = parseInt(qtyEl.getAttribute('max') || qtyEl.max || '0', 10) || 0;
-  var lowStock  = (max > 0 && max < step);
+  var step     = parseInt(qtyEl.getAttribute('data-collection-min-qty') || qtyEl.step || '1', 10) || 1;
+  var max      = parseInt(qtyEl.getAttribute('max') || qtyEl.max || '0', 10) || 0;
+  var lowStock = (max > 0 && max < step);
+  var atMax    = isFinite(max) && sendQty >= max;
   var highlight = max > 0 && sendQty >= max;
 
-  // highlight cand se atinge stocul disponibil
+  // highlight când se atinge stocul disponibil
   qtyEl.classList.toggle('text-red-600', highlight);
   if (highlight) {
     qtyEl.style.setProperty('color', '#e3342f', 'important');
@@ -61,7 +62,7 @@ function qgSyncSliderQtyUI(qtyEl, sendQty) {
   if (wrap) {
     var plus  = wrap.querySelector('[data-collection-quantity-selector="increase"]');
     var minus = wrap.querySelector('[data-collection-quantity-selector="decrease"]');
-    if (plus)  plus.disabled  = isFinite(max) && sendQty >= max;
+    if (plus)  plus.disabled  = atMax;
     if (minus) minus.disabled = sendQty <= step;
   }
 
@@ -69,13 +70,14 @@ function qgSyncSliderQtyUI(qtyEl, sendQty) {
   var card = qtyEl.closest('.sf__pcard, .p-card, .product-card, .sf__col-item, [data-product-id], .swiper-slide, [data-section-type]');
   var dbl  = card && (card.querySelector('[data-collection-double-qty]') || card.querySelector('.collection-double-qty-btn') || card.querySelector('.double-qty-btn'));
   if (dbl) {
-    var disabled = lowStock; // cand stoc < min_qty, dezactivat
+    var disabled = lowStock || atMax;
+    dbl.disabled = disabled;
     dbl.toggleAttribute('disabled', disabled);
     dbl.setAttribute('aria-disabled', String(disabled));
     dbl.classList.toggle('is-disabled', disabled);
   }
 
-  // sincronizeaza duplicatele (daca exista utilitare)
+  // sincronizează duplicatele (dacă există utilitare)
   if (typeof window.collectionSyncOtherQtyInputs === 'function') {
     window.collectionSyncOtherQtyInputs(qtyEl);
   } else if (typeof window.syncOtherQtyInputs === 'function') {
@@ -89,6 +91,7 @@ function qgSyncSliderQtyUI(qtyEl, sendQty) {
     window.updateCollectionDoubleQtyState(qtyEl);
   }
 }
+
 
 
   // ---- Slider Qty Guard (context-aware) ----
