@@ -36,59 +36,60 @@
     return !!(sec && QG_SLIDER_TYPES.has(sec.getAttribute('data-section-type')));
   }
 
-  // Theming-safe UI update for a collection-qty input inside sliders
-  function qgSyncSliderQtyUI(qtyEl, sendQty) {
-    if (!qtyEl) return;
-    // set both prop and attribute (unele scripturi citesc atributul)
-    qtyEl.value = String(sendQty);
-    qtyEl.setAttribute('value', String(sendQty));
+// Theming-safe UI update for a collection-qty input inside sliders
+function qgSyncSliderQtyUI(qtyEl, sendQty) {
+  if (!qtyEl) return;
+  // set both prop and attribute (unele scripturi citesc atributul)
+  qtyEl.value = String(sendQty);
+  qtyEl.setAttribute('value', String(sendQty));
 
-    var step = parseInt(qtyEl.getAttribute('data-collection-min-qty') || qtyEl.step || '1', 10) || 1;
-    var max  = parseInt(qtyEl.getAttribute('max') || qtyEl.max || '0', 10) || 0;
-    var lowStock = (max > 0 && max < step);
-    var highlight = lowStock && sendQty >= max;
+  var step = parseInt(qtyEl.getAttribute('data-collection-min-qty') || qtyEl.step || '1', 10) || 1;
+  var max  = parseInt(qtyEl.getAttribute('max') || qtyEl.max || '0', 10) || 0;
+  var lowStock  = (max > 0 && max < step);
+  var highlight = lowStock && sendQty >= max;
 
-    // low-stock styling aliniat cu tema (doar cand se atinge stocul disponibil)
-    qtyEl.classList.toggle('text-red-600', highlight);
-    if (highlight) {
-      qtyEl.style.setProperty('color', '#e3342f', 'important');
-    } else {
-      qtyEl.style.removeProperty('color');
-    }
-
-    // update +/- states
-    var wrap = qtyEl.closest('collection-quantity-input') || qtyEl.parentNode;
-    if (wrap) {
-      var plus  = wrap.querySelector('[data-collection-quantity-selector="increase"]');
-      var minus = wrap.querySelector('[data-collection-quantity-selector="decrease"]');
-      if (plus)  plus.disabled  = isFinite(max) && sendQty >= max;
-      if (minus) minus.disabled = sendQty <= step;
-    }
-
-    // update “Adauga inca …”
-    var card = qtyEl.closest('.sf__pcard, .p-card, .product-card, .sf__col-item, [data-product-id], .swiper-slide, [data-section-type]');
-    var dbl  = card && (card.querySelector('[data-collection-double-qty]') || card.querySelector('.collection-double-qty-btn') || card.querySelector('.double-qty-btn'));
-    if (dbl) {
-      var disabled = lowStock; // cand stoc < min_qty, dezactivat
-      dbl.toggleAttribute('disabled', disabled);
-      dbl.setAttribute('aria-disabled', String(disabled));
-      dbl.classList.toggle('is-disabled', disabled);
-    }
-
-    // sincronizeaza duplicatele (daca exista utilitare)
-    if (typeof window.collectionSyncOtherQtyInputs === 'function') {
-      window.collectionSyncOtherQtyInputs(qtyEl);
-    } else if (typeof window.syncOtherQtyInputs === 'function') {
-      window.syncOtherQtyInputs(qtyEl);
-    }
-
-    if (typeof window.updateQtyButtonsState === 'function') {
-      window.updateQtyButtonsState(qtyEl);
-    }
-    if (typeof window.updateCollectionDoubleQtyState === 'function') {
-      window.updateCollectionDoubleQtyState(qtyEl);
-    }
+  // low-stock styling aliniat cu tema (doar cand se atinge stocul disponibil)
+  qtyEl.classList.toggle('text-red-600', highlight);
+  if (highlight) {
+    qtyEl.style.setProperty('color', '#e3342f', 'important');
+  } else {
+    qtyEl.style.removeProperty('color');
   }
+
+  // update +/- states
+  var wrap = qtyEl.closest('collection-quantity-input') || qtyEl.parentNode;
+  if (wrap) {
+    var plus  = wrap.querySelector('[data-collection-quantity-selector="increase"]');
+    var minus = wrap.querySelector('[data-collection-quantity-selector="decrease"]');
+    if (plus)  plus.disabled  = isFinite(max) && sendQty >= max;
+    if (minus) minus.disabled = sendQty <= step;
+  }
+
+  // update “Adauga inca …”
+  var card = qtyEl.closest('.sf__pcard, .p-card, .product-card, .sf__col-item, [data-product-id], .swiper-slide, [data-section-type]');
+  var dbl  = card && (card.querySelector('[data-collection-double-qty]') || card.querySelector('.collection-double-qty-btn') || card.querySelector('.double-qty-btn'));
+  if (dbl) {
+    var disabled = lowStock; // cand stoc < min_qty, dezactivat
+    dbl.toggleAttribute('disabled', disabled);
+    dbl.setAttribute('aria-disabled', String(disabled));
+    dbl.classList.toggle('is-disabled', disabled);
+  }
+
+  // sincronizeaza duplicatele (daca exista utilitare)
+  if (typeof window.collectionSyncOtherQtyInputs === 'function') {
+    window.collectionSyncOtherQtyInputs(qtyEl);
+  } else if (typeof window.syncOtherQtyInputs === 'function') {
+    window.syncOtherQtyInputs(qtyEl);
+  }
+
+  if (typeof window.updateQtyButtonsState === 'function') {
+    window.updateQtyButtonsState(qtyEl);
+  }
+  if (typeof window.updateCollectionDoubleQtyState === 'function') {
+    window.updateCollectionDoubleQtyState(qtyEl);
+  }
+}
+
 
   // ---- Slider Qty Guard (context-aware) ----
   function qgIsSliderInput(input) {
