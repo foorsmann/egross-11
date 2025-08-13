@@ -10139,7 +10139,10 @@ class Wishlist {
               container.appendChild(prod);
               prod.classList.remove('hidden');
             }
-          }); // ConceptSGMTheme.Products.initProductForms().catch(console.error)
+          });
+          wishlist_ConceptSGMTheme.Products.initProductForms({
+            context: container
+          }).catch(console.error);
         }
 
         if (noItemAvailable) {
