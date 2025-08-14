@@ -232,20 +232,6 @@
             "title": "Articole Copii Si Jucarii"
           }
         },
-        "collection_block_GWF7fi": {
-          "type": "collection_block",
-          "settings": {
-            "collection": "articole-de-imbracaminte-si-accesorii",
-            "title": "Articole De Imbracaminte Si Accesorii"
-          }
-        },
-        "collection_block_fHef7F": {
-          "type": "collection_block",
-          "settings": {
-            "collection": "incaltaminte-sub-categorie-dedicata",
-            "title": "Incaltaminte"
-          }
-        },
         "collection_block_PcDkMP": {
           "type": "collection_block",
           "settings": {
@@ -274,13 +260,6 @@
             "title": "Electronice Si Electrice"
           }
         },
-        "collection_block_nPLJrP": {
-          "type": "collection_block",
-          "settings": {
-            "collection": "frumusete-ingrijire-personala",
-            "title": "Frumusete Si Ingrijire Personala"
-          }
-        },
         "collection_block_HrrhPr": {
           "type": "collection_block",
           "settings": {
@@ -294,6 +273,27 @@
             "collection": "auto-velo",
             "title": "Auto Si Velo"
           }
+        },
+        "collection_block_GWF7fi": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "articole-de-imbracaminte-si-accesorii",
+            "title": "Articole De Imbracaminte Si Accesorii"
+          }
+        },
+        "collection_block_fHef7F": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "incaltaminte-sub-categorie-dedicata",
+            "title": "Incaltaminte"
+          }
+        },
+        "collection_block_nPLJrP": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "frumusete-ingrijire-personala",
+            "title": "Frumusete Si Ingrijire Personala"
+          }
         }
       },
       "block_order": [
@@ -303,15 +303,15 @@
         "243acd99-34d8-4b1d-9e4e-4539fefc6bf1",
         "16225316461d1cff80-1",
         "collection_block_zFRt9t",
-        "collection_block_GWF7fi",
-        "collection_block_fHef7F",
         "collection_block_PcDkMP",
         "collection_block_jVLR7e",
         "collection_block_gcNk9G",
         "collection_block_MdqbjA",
-        "collection_block_nPLJrP",
         "collection_block_HrrhPr",
-        "collection_block_4VnCmg"
+        "collection_block_4VnCmg",
+        "collection_block_GWF7fi",
+        "collection_block_fHef7F",
+        "collection_block_nPLJrP"
       ],
       "settings": {
         "heading": "Categorii Produse",
@@ -327,7 +327,7 @@
         "show_product_count": false,
         "count_inline_title": true,
         "image_rounded": false,
-        "items_per_row": 4,
+        "items_per_row": 3,
         "item_gap": 30,
         "enable_slider": false,
         "show_pagination": true,
