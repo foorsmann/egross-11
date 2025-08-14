@@ -200,29 +200,29 @@
         "16225316461d1cff80-2": {
           "type": "collection_block",
           "settings": {
-            "collection": "cart-uri",
-            "title": "Cart-uri"
+            "collection": "articole-de-uz-casnic",
+            "title": "Articole De Uz Casnic"
           }
         },
         "7a571158-7686-4e66-a693-4716fc905604": {
           "type": "collection_block",
           "settings": {
-            "collection": "cataratoare",
-            "title": "Cataraoare"
+            "collection": "lampi-solare-led-light",
+            "title": "Lampi Solare LED"
           }
         },
         "12985deb-0775-45ce-80f6-6be7f3150a91": {
           "type": "collection_block",
           "settings": {
-            "collection": "accesorii",
-            "title": "Accesorii"
+            "collection": "papetarie-si-rechizite-scolare",
+            "title": "Papetarie Si Rechizite"
           }
         },
         "243acd99-34d8-4b1d-9e4e-4539fefc6bf1": {
           "type": "collection_block",
           "settings": {
-            "collection": "scutere",
-            "title": ""
+            "collection": "articole-sportive",
+            "title": "Articole Sportive"
           }
         }
       },
