@@ -224,6 +224,76 @@
             "collection": "toate-produsele",
             "title": "Toate Produsele"
           }
+        },
+        "collection_block_zFRt9t": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toate-produsele",
+            "title": "Toate Produsele"
+          }
+        },
+        "collection_block_GWF7fi": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toate-produsele",
+            "title": "Toate Produsele"
+          }
+        },
+        "collection_block_fHef7F": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toate-produsele",
+            "title": "Toate Produsele"
+          }
+        },
+        "collection_block_PcDkMP": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toate-produsele",
+            "title": "Toate Produsele"
+          }
+        },
+        "collection_block_jVLR7e": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toate-produsele",
+            "title": "Toate Produsele"
+          }
+        },
+        "collection_block_gcNk9G": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toate-produsele",
+            "title": "Toate Produsele"
+          }
+        },
+        "collection_block_MdqbjA": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toate-produsele",
+            "title": "Toate Produsele"
+          }
+        },
+        "collection_block_nPLJrP": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toate-produsele",
+            "title": "Toate Produsele"
+          }
+        },
+        "collection_block_HrrhPr": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toate-produsele",
+            "title": "Toate Produsele"
+          }
+        },
+        "collection_block_4VnCmg": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "toate-produsele",
+            "title": "Toate Produsele"
+          }
         }
       },
       "block_order": [
@@ -231,7 +301,17 @@
         "16225316461d1cff80-2",
         "7a571158-7686-4e66-a693-4716fc905604",
         "243acd99-34d8-4b1d-9e4e-4539fefc6bf1",
-        "16225316461d1cff80-1"
+        "16225316461d1cff80-1",
+        "collection_block_zFRt9t",
+        "collection_block_GWF7fi",
+        "collection_block_fHef7F",
+        "collection_block_PcDkMP",
+        "collection_block_jVLR7e",
+        "collection_block_gcNk9G",
+        "collection_block_MdqbjA",
+        "collection_block_nPLJrP",
+        "collection_block_HrrhPr",
+        "collection_block_4VnCmg"
       ],
       "settings": {
         "heading": "Categorii Produse",
@@ -244,13 +324,13 @@
         "card_style": "standard",
         "text_alignment": "left",
         "hover_effect": "scaling-up",
-        "show_product_count": true,
+        "show_product_count": false,
         "count_inline_title": true,
         "image_rounded": false,
         "items_per_row": 4,
         "item_gap": 30,
-        "enable_slider": true,
-        "show_pagination": false,
+        "enable_slider": false,
+        "show_pagination": true,
         "show_navigation": false,
         "autorotate": false,
         "autorotate_speed": 4,
@@ -292,6 +372,7 @@
         "162251092958fcda7c-1",
         "ca2d4551-2c7d-4127-8e24-a66b44e4ece8"
       ],
+      "disabled": true,
       "settings": {
         "heading": "",
         "subheading": "",
