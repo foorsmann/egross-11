@@ -190,11 +190,11 @@
     "16225316461d1cff80": {
       "type": "collection-list",
       "blocks": {
-        "16225316461d1cff80-1": {
+        "12985deb-0775-45ce-80f6-6be7f3150a91": {
           "type": "collection_block",
           "settings": {
-            "collection": "articole-copii-si-jucarii",
-            "title": "Articole Copii Si Jucarii"
+            "collection": "papetarie-si-rechizite-scolare",
+            "title": "Papetarie Si Rechizite"
           }
         },
         "16225316461d1cff80-2": {
@@ -211,27 +211,27 @@
             "title": "Lampi Solare LED"
           }
         },
-        "12985deb-0775-45ce-80f6-6be7f3150a91": {
-          "type": "collection_block",
-          "settings": {
-            "collection": "papetarie-si-rechizite-scolare",
-            "title": "Papetarie Si Rechizite"
-          }
-        },
         "243acd99-34d8-4b1d-9e4e-4539fefc6bf1": {
           "type": "collection_block",
           "settings": {
             "collection": "articole-sportive",
             "title": "Articole Sportive"
           }
+        },
+        "16225316461d1cff80-1": {
+          "type": "collection_block",
+          "settings": {
+            "collection": "articole-copii-si-jucarii",
+            "title": "Articole Copii Si Jucarii"
+          }
         }
       },
       "block_order": [
-        "16225316461d1cff80-1",
+        "12985deb-0775-45ce-80f6-6be7f3150a91",
         "16225316461d1cff80-2",
         "7a571158-7686-4e66-a693-4716fc905604",
-        "12985deb-0775-45ce-80f6-6be7f3150a91",
-        "243acd99-34d8-4b1d-9e4e-4539fefc6bf1"
+        "243acd99-34d8-4b1d-9e4e-4539fefc6bf1",
+        "16225316461d1cff80-1"
       ],
       "settings": {
         "heading": "Categorii Produse",
