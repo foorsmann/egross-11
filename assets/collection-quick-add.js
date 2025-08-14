@@ -266,6 +266,33 @@ function qgSyncSliderQtyUI(qtyEl, sendQty) {
     var input = e.target.closest('input[data-collection-quantity-input]');
     if(!input) return;
     if (qgIsSliderInput(input)) {
+      // Allow user to clear the field while typing. Only enforce the
+      // minimum quantity when the value is not empty.
+      if (e.type === 'input' && input.value === '') {
+        var max  = parseInt(input.getAttribute('max') || input.max || '0', 10) || 0;
+        input.classList.remove('text-red-600');
+        input.style.removeProperty('color');
+
+        var wrap = input.closest('collection-quantity-input') || input.parentNode;
+        if (wrap) {
+          var plus  = wrap.querySelector('[data-collection-quantity-selector="increase"]');
+          var minus = wrap.querySelector('[data-collection-quantity-selector="decrease"]');
+          if (plus)  plus.disabled  = isFinite(max) && max <= 0;
+          if (minus) minus.disabled = true;
+        }
+
+        var card = input.closest('.sf__pcard, .p-card, .product-card, .sf__col-item, [data-product-id], .swiper-slide, [data-section-type]');
+        var dbl  = card && (card.querySelector('[data-collection-double-qty]') || card.querySelector('.collection-double-qty-btn') || card.querySelector('.double-qty-btn'));
+        if (dbl) {
+          var disabled = isFinite(max) && max <= 0;
+          dbl.disabled = disabled;
+          dbl.toggleAttribute('disabled', disabled);
+          dbl.setAttribute('aria-disabled', String(disabled));
+          dbl.classList.toggle('is-disabled', disabled);
+        }
+        return;
+      }
+
       var val = parseInt(input.value, 10);
       if (!isFinite(val)) {
         val = parseInt(input.getAttribute('data-collection-min-qty') || input.step || '1', 10) || 1;
