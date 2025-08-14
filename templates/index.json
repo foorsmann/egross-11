@@ -221,8 +221,8 @@
         "16225316461d1cff80-1": {
           "type": "collection_block",
           "settings": {
-            "collection": "articole-copii-si-jucarii",
-            "title": "Articole Copii Si Jucarii"
+            "collection": "toate-produsele",
+            "title": "Toate Produsele"
           }
         }
       },
