@@ -194,14 +194,16 @@
           "type": "collection_block",
           "settings": {
             "collection": "papetarie-si-rechizite-scolare",
-            "title": "Papetarie Si Rechizite"
+            "title": "Papetarie Si Rechizite",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_02_25_36_PM.png"
           }
         },
         "16225316461d1cff80-2": {
           "type": "collection_block",
           "settings": {
             "collection": "articole-de-uz-casnic",
-            "title": "Articole De Uz Casnic"
+            "title": "Articole De Uz Casnic",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_02_25_50_PM.png"
           }
         },
         "7a571158-7686-4e66-a693-4716fc905604": {
