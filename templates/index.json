@@ -265,14 +265,16 @@
           "type": "collection_block",
           "settings": {
             "collection": "electronice-electrice",
-            "title": "Electronice Si Electrice"
+            "title": "Electronice Si Electrice",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_02_55_30_PM.png"
           }
         },
         "collection_block_HrrhPr": {
           "type": "collection_block",
           "settings": {
             "collection": "gradina-outdoor",
-            "title": "Gradina Si Outdoor"
+            "title": "Gradina Si Outdoor",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_02_58_27_PM.png"
           }
         },
         "collection_block_4VnCmg": {
