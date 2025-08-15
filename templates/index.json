@@ -226,7 +226,8 @@
           "type": "collection_block",
           "settings": {
             "collection": "toate-produsele",
-            "title": "Toate Produsele"
+            "title": "Toate Produsele",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_03_25_24_PM.png"
           }
         },
         "collection_block_zFRt9t": {
