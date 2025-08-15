@@ -16,7 +16,7 @@
           "type": "slider_item",
           "settings": {
             "background": "shopify://shop_images/aa.jpg",
-            "content_in_container": true,
+            "content_in_container": false,
             "content_position": "right middle",
             "text_alignment": "right",
             "text_size": "large",
