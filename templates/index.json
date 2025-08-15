@@ -15,9 +15,9 @@
         "1621243260e1af0c20-0": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/aa.jpg",
+            "background": "shopify://shop_images/ChatGPT_Image_Aug_16_2025_01_23_49_AM.png",
             "content_in_container": false,
-            "content_position": "right middle",
+            "content_position": "right top",
             "text_alignment": "right",
             "text_size": "large",
             "text_color": "black",
@@ -27,8 +27,8 @@
             "image_link": "",
             "button_text": "Vezi Toate Produsele",
             "button_link": "shopify://collections/all",
-            "button_style": "sf__btn-secondary",
-            "button_size": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "sf__btn-large",
             "show_footer": false,
             "footer_alignment": "end",
             "footer_text": "",
