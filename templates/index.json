@@ -281,7 +281,8 @@
           "type": "collection_block",
           "settings": {
             "collection": "auto-velo",
-            "title": "Auto Si Velo"
+            "title": "Auto Si Velo",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_03_01_14_PM.png"
           }
         },
         "collection_block_GWF7fi": {
