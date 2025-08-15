@@ -289,7 +289,8 @@
           "type": "collection_block",
           "settings": {
             "collection": "articole-de-imbracaminte-si-accesorii",
-            "title": "Articole De Imbracaminte Si Accesorii"
+            "title": "Articole De Imbracaminte Si Accesorii",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_03_03_24_PM.png"
           }
         },
         "collection_block_fHef7F": {
