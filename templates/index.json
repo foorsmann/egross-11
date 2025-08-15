@@ -297,14 +297,16 @@
           "type": "collection_block",
           "settings": {
             "collection": "incaltaminte-sub-categorie-dedicata",
-            "title": "Incaltaminte"
+            "title": "Incaltaminte",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_03_05_59_PM.png"
           }
         },
         "collection_block_nPLJrP": {
           "type": "collection_block",
           "settings": {
             "collection": "frumusete-ingrijire-personala",
-            "title": "Frumusete Si Ingrijire Personala"
+            "title": "Frumusete Si Ingrijire Personala",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_03_08_53_PM.png"
           }
         }
       },
