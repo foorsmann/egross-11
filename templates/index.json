@@ -110,6 +110,7 @@
         "16225125199f82d8fe-0": {
           "type": "iconbox",
           "settings": {
+            "image": "shopify://shop_images/3.png",
             "image_by_url": "",
             "title": "Livrare Gratuita",
             "description": "<p>Comanda de +200 lei</p>",
@@ -123,6 +124,7 @@
         "16225125199f82d8fe-1": {
           "type": "iconbox",
           "settings": {
+            "image": "shopify://shop_images/2.png",
             "image_by_url": "",
             "title": "Retur Garantat",
             "description": "<p>Multumit sau banii inapoi</p>",
@@ -136,6 +138,7 @@
         "16225125199f82d8fe-2": {
           "type": "iconbox",
           "settings": {
+            "image": "shopify://shop_images/1.png",
             "image_by_url": "",
             "title": "Asistenta Dedicata",
             "description": "<p>In fiecare zi a saptamanii</p>",
@@ -149,6 +152,7 @@
         "71deafbb-3baf-443a-a087-3f7b8af7b9fa": {
           "type": "iconbox",
           "settings": {
+            "image": "shopify://shop_images/4.png",
             "image_by_url": "",
             "title": "Plati Securizate",
             "description": "<p>Comanda cu incredere</p>",
