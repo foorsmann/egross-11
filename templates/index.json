@@ -210,14 +210,16 @@
           "type": "collection_block",
           "settings": {
             "collection": "lampi-solare-led-light",
-            "title": "Lampi Solare LED"
+            "title": "Lampi Solare LED",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_02_34_55_PM.png"
           }
         },
         "243acd99-34d8-4b1d-9e4e-4539fefc6bf1": {
           "type": "collection_block",
           "settings": {
             "collection": "articole-sportive",
-            "title": "Articole Sportive"
+            "title": "Articole Sportive",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_02_38_18_PM.png"
           }
         },
         "16225316461d1cff80-1": {
@@ -231,28 +233,32 @@
           "type": "collection_block",
           "settings": {
             "collection": "articole-copii-si-jucarii",
-            "title": "Articole Copii Si Jucarii"
+            "title": "Articole Copii Si Jucarii",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_02_41_37_PM.png"
           }
         },
         "collection_block_PcDkMP": {
           "type": "collection_block",
           "settings": {
             "collection": "incarcatoare-cabluri-android-iphone",
-            "title": "Incarcatoare Si Cabluri"
+            "title": "Incarcatoare Si Cabluri",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_02_45_54_PM.png"
           }
         },
         "collection_block_jVLR7e": {
           "type": "collection_block",
           "settings": {
             "collection": "decoratiuni-si-ornamente",
-            "title": "Decoratiuni Si Ornamente"
+            "title": "Decoratiuni Si Ornamente",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_02_52_43_PM.png"
           }
         },
         "collection_block_gcNk9G": {
           "type": "collection_block",
           "settings": {
             "collection": "decoratiuni-craciun-globuri-ghirlande-stickere",
-            "title": "Decoratiuni Craciun"
+            "title": "Decoratiuni Craciun",
+            "item_image": "shopify://shop_images/ChatGPT_Image_Aug_15_2025_02_48_40_PM.png"
           }
         },
         "collection_block_MdqbjA": {
