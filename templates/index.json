@@ -22,7 +22,7 @@
             "text_size": "large",
             "text_color": "black",
             "subheading": "<span class=\"font-semibold\"></span>",
-            "title": "<span style=\"color:black; stroke:1px white; font-weight:bold;\">\n  Bine ati venit <br> la EGROSS\n</span>",
+            "title": "<span>Bine ati venit <br> la EGROSS</span>",
             "description": "",
             "image_link": "",
             "button_text": "Vezi Toate Produsele",
