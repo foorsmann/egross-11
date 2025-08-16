@@ -15,7 +15,7 @@
         "1621243260e1af0c20-0": {
           "type": "slider_item",
           "settings": {
-            "background": "shopify://shop_images/HERO_SECTION.jpg",
+            "background": "shopify://shop_images/Hero-section-f.jpg",
             "content_in_container": false,
             "content_position": "right top",
             "text_alignment": "right",
