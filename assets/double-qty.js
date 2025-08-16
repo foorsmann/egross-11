@@ -115,6 +115,9 @@
     var max = input.max ? parseInt(input.max, 10) : Infinity;
     var step = parseInt(input.getAttribute('data-min-qty'), 10) || parseInt(input.step,10) || 1;
     var minQty = step;
+    if(max < minQty){
+      minQty = 1;
+    }
     var val = parseInt(input.value, 10);
     if(isNaN(val)) val = 0; // treat empty input as 0 so minus stays disabled
 
@@ -275,6 +278,10 @@ var BUTTON_CLASS = 'double-qty-btn';
     var step = parseInt(input.getAttribute('data-min-qty'), 10) || 1;
     var max = input.max ? parseInt(input.max, 10) : Infinity;
     var minQty = step; // valoarea minimă configurată
+    if(max < minQty){
+      minQty = 1;
+      step = 1;
+    }
     var val = baseVal !== undefined ? parseInt(baseVal,10) : parseInt(input.value, 10);
     if(isNaN(val)) val = 1;
 

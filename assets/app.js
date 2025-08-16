@@ -8856,11 +8856,15 @@ _defineProperty(this, "updateQtyBtnStates", () => {
     ? quantityBtns.find(b => b.dataset.quantitySelector === 'decrease' || b.name === 'minus')
     : null;
   
-  const step = Number(quantityInput.getAttribute('data-min-qty')) || Number(quantityInput.step) || 1;
-  const minQty = step;
+  let step = Number(quantityInput.getAttribute('data-min-qty')) || Number(quantityInput.step) || 1;
+  let minQty = step;
   let max = this.productData?.selected_variant?.inventory_quantity ?? Infinity;
   const attrMax = parseFloat(quantityInput.max);
   if (!Number.isNaN(attrMax)) max = attrMax;
+  if (max < minQty) {
+    minQty = 1;
+    step = 1;
+  }
   let val = parseInt(quantityInput.value, 10);
   if (Number.isNaN(val)) val = 1;
   if (plusBtn) plusBtn.disabled = isFinite(max) && val >= max;
@@ -8871,14 +8875,18 @@ _defineProperty(this, "updateQtyBtnStates", () => {
 _defineProperty(this, "handleQtyBtnClick", (e, btn) => {
   const { quantitySelector } = btn.dataset;
   const { quantityInput } = this.domNodes;
-  const step = Number(quantityInput.getAttribute('data-min-qty')) || Number(quantityInput.step) || 1;
+  let step = Number(quantityInput.getAttribute('data-min-qty')) || Number(quantityInput.step) || 1;
   const min = 1;
-  const minQty = step; // baza pentru calculele de snap
+  let minQty = step; // baza pentru calculele de snap
 
   // Folosește întâi input.max dacă există, altfel variant.inventory_quantity
   let max = this.productData?.selected_variant?.inventory_quantity ?? Infinity;
   const attrMax = parseFloat(quantityInput.max);
   if (!Number.isNaN(attrMax)) max = attrMax;
+  if (max < minQty) {
+    minQty = 1;
+    step = 1;
+  }
 
   let currentQty = parseInt(quantityInput.value, 10);
   if (Number.isNaN(currentQty)) currentQty = 1;
@@ -10139,7 +10147,10 @@ class Wishlist {
               container.appendChild(prod);
               prod.classList.remove('hidden');
             }
-          }); // ConceptSGMTheme.Products.initProductForms().catch(console.error)
+          });
+          wishlist_ConceptSGMTheme.Products.initProductForms({
+            context: container
+          }).catch(console.error);
         }
 
         if (noItemAvailable) {
