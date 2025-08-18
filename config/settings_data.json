@@ -109,7 +109,7 @@
     "search_by_tag": true,
     "search_by_body": true,
     "search_unavailable_products": "LAST",
-    "wishlist_page": "wishlist-page",
+    "wishlist_page": "lista-dorinte",
     "agree_text": "<p>Sunt de acord cu <a href=\"/pages/termeni-conditii\" target=\"_blank\" title=\"Termeni & Conditii\">Termenii si Conditiile</a></p>",
     "show_agree_on_product": false,
     "show_cookie_consent": true,
